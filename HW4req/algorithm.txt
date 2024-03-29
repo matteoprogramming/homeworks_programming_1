@@ -1,0 +1,55 @@
+The main function takes as input two values (type str): the source_root and the target_root.
+In the source root there is the index.txt file that contains the name and the position of the songs.
+
+
+GET_MUSIC_STRING
+First of all we need of a function that from the path can read the content of the text file.
+I called this function get_music_string and it takes as arguments the source root and a file path:
+after opening the file in the reading mode, I take all the lines and I convert them in our line format.
+By joining all the lines, I get a string with all the contents of the song in the Tarahumarasian
+notation (tar from now, while the Umkansian notation will be abbreviated to um).
+
+
+CONVERTER
+Now we need a function that converts music from tar notation to um notation.
+In order to do this (as if the notations were few and simple)
+I thought of developing a third notation which, having been developed by me, we will call my_encoding.
+In this notation each character represents a unit of time:
+so we must convert notes that use double character into a single character.
+We will therefore replace the key value of each dictionary in the tar notation string in order:
+                                
+conversion_dict_0 = {           |        conversion_dict_1 = {
+    "0-":"H",                   |               "0":"A",
+    "0+":"I",                   |               "1":"B",
+    "1-":"J",                   |               "2":"C",
+    "1+":"K",                   |               "3":"D",
+    "2-":"L",                   |               "4":"E",
+    "2+":"M",                   |               "5":"F",
+    "3-":"N",                   |               "6":"G",
+    "3+":"O",                   |               " ":"P"
+    "4-":"Q",                   |           }
+    "4+":"R",                   |
+    "5-":"S",                   |
+    "5+":"T",                   |
+    "6-":"U",                   |
+    "6+":"V"                    |
+    }                           |
+
+By construction, the length of this string is equal to the song duration,
+so we save this duration in a variable.
+
+Now we can prune our string with a function that counts the repetitions
+for each character/series of characters.
+We can do this through two nested loops: the first which iterates over the string regardless,
+another internal one which continues to iterate if the character repeats.
+By combining each character and how many times it appears, we get an almost complete string.
+Now all we have to do is convert those convenient letters that we introduced for the altered notes
+with conversion_dict_0 into the respective altered notes.
+
+Now we need to print this translated content to the root target folder:
+Manipulating the path extracted at the beginning, we create all the necessary folders
+with the recursive function os.makedirs() and with the open() function in writing mode
+we open and write on the final file, giving it as title what we had extracted from the index of the source root.
+For each song we associate the title with the duration in a dictionary.
+After working on all the songs, we create the indix.txt file of the target root with this dictionary,
+sorting it with an appropriate lamba function. let's return this dictionary and we're done.
