@@ -1,5 +1,7 @@
 # HOMEWORKS - PROGRAMMING 1
-My solutions to the homeworks of the Programming 1 course (in Python). Together with the test carried out in the laboratory, it contributed to the score: 30 cum laude!
+My solutions to the homeworks of the Programming 1 course (in Python).
+
+GRADE: 30 CUM LAUDE
 
 Topics:
 ✅ Python fundamentals: strings, lists, dictionaries, sets, etc...
