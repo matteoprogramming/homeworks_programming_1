@@ -1,0 +1,11 @@
+My code implement the following algorithm:
+1) given the original and the corrupted images and the side,
+   creates a list of subimages for both images
+2) then it compares the images on the same positon to understand
+   rotation applied and obtained what should be returned by the function
+3) join all subkeys to obain a string that is necessary for the decription
+4) extract the corrupted file and decrypts it implementing the algorithm 
+   given in the decription and the save this file in the path indicated
+5) return the list of subkeys
+
+Buona Immacolata!
