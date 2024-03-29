@@ -2,8 +2,8 @@
 My solutions to the homeworks of the Programming 1 course (in Python). Together with the test carried out in the laboratory, it contributed to the score: 30 cum laude!
 
 Topics:
-✅Python fundamentals: strings, lists, dictionaries, sets etc...
-✅Images (lists of lists)
+✅Python fundamentals: strings, lists, dictionaries, sets etc...\n
+✅Images (lists of lists)\n
 ✅Recursion
 ✅Trees 
 ✅Basics of object-oriented programming
