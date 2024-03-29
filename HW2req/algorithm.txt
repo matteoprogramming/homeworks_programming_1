@@ -1,0 +1,101 @@
+--------------------------------
+|||||||||| ALGORITHM |||||||||||
+--------------------------------
+
+The program divides the work between three functions:
+- decode_digites(digits, base)
+- generate_digits(bases)
+- find_doubles(bases, set) 
+
+
+
+--------------------------------
+decode_digites(digits, base)
+---------------------------------
+Through a cycle it accesses each digit and interprets it as a function of the corresponding base
+according to the traditional meaning of a digit in a positional system
+(value of the digit is equal to the digit multiplied by the base with the exponent being the position)
+By adding the contributions of each digit, it returns the decimal decoding of that list of digits in the given base.
+
+
+
+--------------------------------
+generate_digits(bases)
+--------------------------------
+To understand how this function works, it is best to refer to the truth table writing mechanism.
+
+Example
+  A   B   C    SOME FUNCTION 
+| 0 | 0 | 0 |        -        |
+| 0 | 0 | 1 |        -        |
+| 0 | 1 | 0 |        -        |
+| 0 | 1 | 1 |        -        |
+| 1 | 0 | 0 |        -        |
+| 1 | 0 | 1 |        -        |
+| 1 | 1 | 0 |        -        |
+| 1 | 1 | 1 |        -        |
+
+As we can see from the example, 0 and 1 alternate in a certain way.
+In each column there is a group of digits that repeats:
+- in column C this group is 01 and is repeated 4 times;
+- in column B this group is 0011 and is repeated 2 times;
+- in column A this group is 00001111 and is repeated 1 time.
+
+It is equally easy to notice how in each digit each 0 and 1 are repeated a certain number of times:
+- in column C 1 time;
+- in column C 2 times;
+- in column C 4 times.
+
+We easily recognize the geometric sequence of reason 2, whose images
+are taken in increasing or decreasing order.
+This happens because each variable can be worth 0 or 1 and therefore
+can only take on two different values.
+
+In the case of our function, each digit can take on a number of values
+given by the digit itself: from 0 to the previous one of the digit itself.
+
+We now pose some small combinatorics problems:
+- How many combinations are there in total?
+    Since each digit varies in a number of values equal to the digit of the base,
+    in total we have a number of digits equal to the product of the various digits of the base.
+- How many times does each digit appear?
+    Since each digit must appear a number of times equal to the number of combinations with one digit less,
+    this digit will appear a number of times equal to the number of total combinations
+    divided by the value of the digit.
+- How many times will each group of digits appear? 
+    Since each digit appears only once in a given group, this number will be the same as the one above.
+
+
+For this reason we first calculate the number of digits we can generate
+and then initialize a number equal to this of empty lists which we will fill with various cycles.
+
+we need two counters:
+- group_card gives us the number of times the group of digits of a base is repeated
+  it starts from 1 and multiplies by the digit from time to time;
+- number_card gives us the number of times each digit is repeated within the group
+  and this counter starts from the number of all combinations and is divided by the base at each cycle.
+
+For each base, for each group, for each digit compatible with that base,
+the digit is added to each list for the number of repetitions of each digit.
+With a counter inside the outermost cycle, for each base the entire list is accessed and extended.
+In the end the result_list will contain all the combinations.
+
+
+
+--------------------------------
+find_doubles(bases, set) 
+--------------------------------
+
+The function constructs two sets:
+- all_numbers_set contains all the numbers that can be represented with those bases;
+- multiple_numbers_set which contains numbers that have more than one representation with those bases.
+
+For each element of the combinations that can be created
+with the given base (which are created with the generate_digits() function)
+the decimal representation is calculated with the decode_digits() function
+and if that number is not present in the set of representable number (sall_numbers_set),
+it adds it to that, otherwise (that is if it is already present) it adds it
+to the set of numbers that have more than one representation.
+
+Feeding the list of bases to this function,
+we obtain the set of numbers with multiple representations and therefore the problem finds its solution.
